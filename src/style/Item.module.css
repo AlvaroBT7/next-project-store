@@ -1,0 +1,21 @@
+.Item {
+  background-color: #ddd;
+  padding: 20px;
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+}
+
+.Item * {
+  color: #222;
+  margin: 10px 0;
+  text-align: center;
+}
+
+.name {
+  font-size: large;
+}
+
+.price {
+  color: rgb(8, 169, 8);
+}

@@ -1,0 +1,29 @@
+[
+  {
+    "id": 0,
+    "name": "Alvaro",
+    "surname": "Barrero",
+    "access": {
+      "email": "kakapodrida@gmail.com",
+      "password": "kaka"
+    }
+  },
+  {
+    "id": 1,
+    "name": "Alfredo",
+    "surname": "Gutierrez",
+    "access": {
+      "email": "alfredo@gmail.com",
+      "password": "alfredo"
+    }
+  },
+  {
+    "id": 2,
+    "name": "Paco",
+    "surname": "Sanz",
+    "access": {
+      "email": "paco@gmail.com",
+      "password": "123"
+    }
+  }
+]

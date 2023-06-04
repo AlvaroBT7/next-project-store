@@ -1,0 +1,26 @@
+[
+  {
+    "id": 0,
+    "name": "Patineta",
+    "description": "Patineta color verde",
+    "price": 15
+  },
+  {
+    "id": 1,
+    "name": "Sandia podrida",
+    "description": "Sandia en proceso de putrefaccion",
+    "price": 1500
+  },
+  {
+    "id": 2,
+    "name": "Juvete de monionion",
+    "description": "Este es un Juvete de monionion",
+    "price": 99
+  },
+  {
+    "id": 3,
+    "name": "Motosierra",
+    "description": "Esta es una motorsierra",
+    "price": 120
+  }
+]

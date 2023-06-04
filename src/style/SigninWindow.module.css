@@ -1,0 +1,27 @@
+.SinginWindowBG {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #0005;
+  backdrop-filter: blur(5px);
+}
+
+.SinginWindow {
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #ddd;
+  color: #000;
+  border-radius: 0.3em;
+}
+
+.closeWindowButton {
+  width: 50px;
+  height: 50px;
+}

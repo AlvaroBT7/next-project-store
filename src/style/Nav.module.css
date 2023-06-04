@@ -1,0 +1,17 @@
+.Nav {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  list-style: none;
+  background-color: #000;
+  color: #fff;
+}
+
+.li {
+  position: relative;
+}
+
+.li button {
+  background-color: #f00;
+  padding: 10px 15px;
+}
