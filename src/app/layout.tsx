@@ -1,4 +1,4 @@
-import CurrentUserAccountIdProvider from "../contexts/CurrentUserAccountId";
+// import CurrentUserAccountIdProvider from "../contexts/CurrentUserAccountId";
 import UsersDataProvider from "../contexts/UsersData";
 import Nav from "../components/Nav";
 import "./globals.css";
@@ -16,12 +16,10 @@ export default function RootLayout({
   return (
     <html lang="es">
       <UsersDataProvider>
-        <CurrentUserAccountIdProvider>
-          <body>
-            <Nav />
-            {children}
-          </body>
-        </CurrentUserAccountIdProvider>
+        <body>
+          <Nav />
+          {children}
+        </body>
       </UsersDataProvider>
     </html>
   );

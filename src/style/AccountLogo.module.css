@@ -2,17 +2,3 @@
   background-color: rgb(31, 174, 31);
   padding: 5px;
 }
-
-.AccountLogoCard {
-  display: flex;
-  flex-direction: column;
-  position: absolute;
-  top: 50px;
-  background-color: #ddd;
-  padding: 20px;
-  border-radius: 0.2em;
-}
-
-.AccountLogoCard * {
-  color: #000;
-}

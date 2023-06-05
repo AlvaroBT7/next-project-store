@@ -12,5 +12,16 @@ export interface Item {
   id: number;
   name: string;
   description: string;
-  price: number
+  price: number;
+}
+
+export interface GetUserByIdParams {
+  userId: number;
+  users: User[];
+}
+
+export interface ValidateCredentialsParams {
+  email: string;
+  password: string;
+  users: User[];
 }
