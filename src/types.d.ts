@@ -25,3 +25,16 @@ export interface ValidateCredentialsParams {
   password: string;
   users: User[];
 }
+
+export interface CreateUserFromLoginWindowDataParams {
+  inputName: string;
+  inputSurname: string;
+  inputEmail: string;
+  inputPassword: string;
+  newUserId: number;
+}
+
+export interface ValidateNewUserParams {
+  newUser: User;
+  users: User[];
+}

@@ -1,4 +1,25 @@
-.AccountLogo {
-  background-color: rgb(31, 174, 31);
-  padding: 5px;
+.AccountLogoUnLogged {
+  background-color: #48e;
+  border-radius: 0.5em;
+  padding: 10px;
+  user-select: none;
+  color: #fff;
+  transition: all 0.1s;
+}
+
+.AccountLogoUnLogged:hover {
+  background-color: #59f;
+}
+
+.AccountLogoLogged {
+  background-color: #06d206;
+  border-radius: 0.5em;
+  padding: 10px;
+  user-select: none;
+  color: #fff;
+  transition: all 0.1s;
+}
+
+.AccountLogoLogged:hover {
+  background-color: #1bec1b;
 }

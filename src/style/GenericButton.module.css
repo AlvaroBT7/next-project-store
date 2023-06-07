@@ -1,0 +1,41 @@
+.GenericButton-blue {
+  font-size: small;
+  color: #fff;
+  background-color: #48e;
+  padding: 10px;
+  border-radius: 0.5em;
+  user-select: none;
+  transition: all 0.1s;
+}
+
+.GenericButton-blue:hover {
+  background-color: #59f;
+}
+
+.GenericButton-green {
+  font-size: small;
+  color: #fff;
+  background-color: #0ac623;
+  padding: 10px;
+  border-radius: 0.5em;
+  user-select: none;
+  transition: all 0.1s;
+}
+
+.GenericButton-green:hover {
+  background-color: #2adc19;
+}
+
+.GenericButton-red {
+  font-size: small;
+  color: #fff;
+  background-color: #ec0744;
+  padding: 10px;
+  border-radius: 0.5em;
+  user-select: none;
+  transition: all 0.1s;
+}
+
+.GenericButton-red:hover {
+  background-color: #f62d59;
+}

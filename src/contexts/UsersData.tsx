@@ -7,8 +7,10 @@ interface ValueProp {
   users: User[] | null;
   currentUserAccountId: number | null;
   setCurrentUserAccountId: (newValue: number) => void;
-  showingSinginWindow: boolean;
-  setShowingSinginWindow: (newValue: boolean) => void;
+  showingSigninWindow: boolean;
+  setShowingSigninWindow: (newValue: boolean) => void;
+  showingLoginWindow: boolean;
+  setShowingLoginWindow: (newValue: boolean) => void;
 }
 
 export const UsersDataContext = createContext<ValueProp | null>(null);
@@ -18,8 +20,10 @@ const UsersDataProvider = ({ children }: { children: React.ReactNode }) => {
   const [currentUserAccountId, setCurrentUserAccountId] = useState<
     number | null
   >(null);
-  const [showingSinginWindow, setShowingSinginWindow] =
+  const [showingSigninWindow, setShowingSigninWindow] =
     useState<boolean>(false);
+
+  const [showingLoginWindow, setShowingLoginWindow] = useState<boolean>(false);
 
   useEffect(() => setUsers(usersData as User[]), []);
   return (
@@ -28,8 +32,10 @@ const UsersDataProvider = ({ children }: { children: React.ReactNode }) => {
         users,
         currentUserAccountId,
         setCurrentUserAccountId,
-        showingSinginWindow,
-        setShowingSinginWindow,
+        showingSigninWindow,
+        setShowingSigninWindow,
+        showingLoginWindow,
+        setShowingLoginWindow,
       }}
     >
       {children}

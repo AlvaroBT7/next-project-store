@@ -22,5 +22,11 @@
     "name": "Motosierra",
     "description": "Esta es una motorsierra",
     "price": 120
+  },
+  {
+    "id": 4,
+    "name": "Teclado custom",
+    "description": "teclado custom de 800 pavos",
+    "price": 800
   }
 ]

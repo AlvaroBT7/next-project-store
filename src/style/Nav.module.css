@@ -2,8 +2,9 @@
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+  height: 75px;
   list-style: none;
-  background-color: #000;
+  background-color: #1e2124;
   color: #fff;
 }
 
@@ -11,7 +12,6 @@
   position: relative;
 }
 
-.li button {
-  background-color: #f00;
-  padding: 10px 15px;
+.li h1 {
+  font-size: xx-large;
 }

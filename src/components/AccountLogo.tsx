@@ -1,8 +1,9 @@
+"use client";
 import { useContext, useState } from "react";
 import { UsersDataContext } from "../contexts/UsersData";
 import { User } from "../types";
-import SinginWindow from "./SinginWindow";
 import AccountLogoCard from "./AccountLogoCard";
+import GenericButton from "./generic/GenericButton";
 import { getUserById } from "../utils";
 import styles from "../style/AccountLogo.module.css";
 
@@ -12,31 +13,33 @@ interface Props {
 
 const AccountLogo = ({ userId }: Props) => {
   const [showingUserInfo, setShowingUserInfo] = useState<boolean>(false);
-  const { users, showingSinginWindow, setShowingSinginWindow } = useContext(
+  const { users, setShowingSigninWindow, setCurrentUserAccountId } = useContext(
     UsersDataContext
   ) as {
     users: User[];
-    showingSinginWindow: boolean;
-    setShowingSinginWindow: (newValue: boolean) => void;
+    setCurrentUserAccountId: (newValue: number | null) => void;
+    setShowingSigninWindow: (newValue: boolean) => void;
   };
   // conditioanl rendering
   if (userId === null) {
-    const handleClick = () => setShowingSinginWindow(true);
+    const handleClick = () => setShowingSigninWindow(true);
     return (
       <>
-        {showingSinginWindow ? (
-          <SinginWindow handleClick={() => setShowingSinginWindow(false)} />
-        ) : null}
-        <button onClick={handleClick} className={styles.AccountLogo}>
+        <GenericButton
+          style={{
+            animation: "logout 0.2s ease",
+          }}
+          callback={handleClick}
+        >
           Log-In
-        </button>
+        </GenericButton>
       </>
     );
   }
   if (users === null)
     return (
       <div>
-        <span>fetching account...</span>
+        <span>loading data...</span>
       </div>
     );
   // finds the user by id prop
@@ -48,16 +51,23 @@ const AccountLogo = ({ userId }: Props) => {
     <>
       {showingUserInfo ? (
         <AccountLogoCard
-          handleMouseLeave={() => setShowingUserInfo(false)}
+          handleCloseButtonCardClick={() => setShowingUserInfo(false)}
+          handleSingoutButtonCardClick={() => {
+            setCurrentUserAccountId(null);
+            setShowingUserInfo(false);
+          }}
           userData={user}
         />
       ) : null}
-      <button
-        className={styles.AccountLogo}
-        onClick={() => setShowingUserInfo(true)}
+      <GenericButton
+        callback={() => setShowingUserInfo(true)}
+        style={{
+          animation: "logout 0.2s ease",
+        }}
+        type='green'
       >
         {user.name}
-      </button>
+      </GenericButton>
     </>
   );
 };

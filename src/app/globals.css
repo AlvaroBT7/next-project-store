@@ -5,9 +5,58 @@
   border: 0;
   outline: 0;
   font-family: sans-serif;
-  color: #fff;
 }
 
 body {
-  background-color: #1a1e26;
+  background-color: #ddd;
+}
+
+@keyframes show_window {
+  from {
+    opacity: 0;
+    transform: scale(50%, 50%);
+  }
+  to {
+    opacity: 1;
+    transform: scale(100%, 100%);
+  }
+}
+
+@keyframes error_button_shake {
+  0% {
+    transform: translate(0, 0);
+  }
+  30% {
+    transform: translate(0, 20px);
+  }
+  80% {
+    transform: translate(0, -5px);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+@keyframes logout {
+  0% {
+    transform: translate(0, 0);
+  }
+  30% {
+    transform: translate(0, 20px);
+  }
+  80% {
+    transform: translate(0, -5px);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
