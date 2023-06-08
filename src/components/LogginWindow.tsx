@@ -5,9 +5,10 @@ import {
 } from "../utils";
 import { useContext, useState } from "react";
 import { UsersDataContext } from "../contexts/UsersData";
-import { User } from "../types";
-import GenericButton from '../components/generic/GenericButton'
-import { Cross } from "../components/svgs/index";
+import { User, ValidateNewUserParams, ValidateNewUserReturn } from "../types";
+import AuthenticationButton from "../components/AuthenticationButton";
+import AuthenticationErrorMessages from "../components/AuthenticationErrorMessages";
+import CloseWindowButton from "../components/CloseWindowButton";
 import styles from "../style/LoginWindow.module.css";
 
 const LoggingWindow = () => {
@@ -28,14 +29,13 @@ const LoggingWindow = () => {
   const [inputEmail, setInputEmail] = useState<string>("");
   const [inputPassword, setInputPassword] = useState<string>("");
 
-  const [authenticationError, setAuthenticationError] = useState<string | null>(
-    null
-  );
+  const [authenticationErrors, setAuthenticationErrors] = useState<
+    string[] | null
+  >(null);
   const [loadingButtonAnimation, setLoadingButtonAnimation] =
     useState<boolean>(false);
 
-  const handleCloseButtonClick = () => setShowingLoginWindow(false);
-  const handleEnterButtonClick = async () => {
+  const handleAthenticationButtonClick = async () => {
     try {
       await new Promise((resolve, reject) => {
         setLoadingButtonAnimation(true);
@@ -43,51 +43,41 @@ const LoggingWindow = () => {
           if (users !== null) resolve(null);
         }, 100);
         setTimeout(() => {
-          reject(
-            "Something went wrong fetching the data. It seems to be stuck."
-          );
+          reject([
+            "Something went wrong fetching the data. It seems to be stuck.",
+          ]);
         }, 3000);
       });
-      const newUser = createUserFromLoginWindowData({
-        inputName,
-        inputSurname,
-        inputEmail,
-        inputPassword,
-        newUserId: getNextUserId(users as User[]),
+      const newUser: User = await new Promise((resolve, reject) => {
+        const newUser = createUserFromLoginWindowData({
+          inputName,
+          inputSurname,
+          inputEmail,
+          inputPassword,
+          newUserId: getNextUserId(users as User[]),
+        });
+        if (newUser === null)
+          return reject(["You cannot skip fields when creating the account."]);
+        resolve(newUser);
       });
       await new Promise((resolve, reject) => {
-        const validationErrors = {
-          name: 0,
-          email: 1,
-        };
-        const errorMessages = [
-          "The name or the surname you chose is already in use.",
-          "There is already an account associated with that email.",
-        ];
-
-        const validation: boolean[] = validateNewUser({
+        const validation: ValidateNewUserReturn = validateNewUser({
           newUser,
           users,
-        } as {
-          newUser: User;
-          users: User[];
-        });
-        if (validation[validationErrors["name"]])
-          return reject(errorMessages[0]);
-        if (validation[validationErrors["email"]])
-          return reject(errorMessages[1]);
-
+        } as ValidateNewUserParams);
+        if (validation.errors) return reject(validation.messages);
         resolve(null);
       });
       (users as User[]).push(newUser);
       setCurrentUserAccountId(newUser.id);
       setShowingLoginWindow(false);
     } catch (e: any) {
-      setAuthenticationError(e.toString());
+      setAuthenticationErrors(e);
     } finally {
       setLoadingButtonAnimation(false);
     }
   };
+  const handleCloseWindowButtonClick = () => setShowingLoginWindow(false);
   const handleChangeWindowButton = () => {
     setShowingLoginWindow(false);
     setShowingSigninWindow(true);
@@ -100,19 +90,14 @@ const LoggingWindow = () => {
         }}
         className={styles.SinginWindow}
       >
-        <div
-          className={styles.closeWindowButton}
-          onClick={handleCloseButtonClick}
-        >
-          <Cross />
-        </div>
+        <CloseWindowButton callback={handleCloseWindowButtonClick} />
         <div className={styles.titleContainer}>
           <span>Log-In Window</span>
         </div>
         <div className={styles.inputContainer}>
           <input
             onChange={({ target }) => {
-              setAuthenticationError(null);
+              setAuthenticationErrors(null);
               setInputName(target.value);
             }}
             type="text"
@@ -121,7 +106,7 @@ const LoggingWindow = () => {
           />
           <input
             onChange={({ target }) => {
-              setAuthenticationError(null);
+              setAuthenticationErrors(null);
               setInputSurname(target.value);
             }}
             type="text"
@@ -130,7 +115,7 @@ const LoggingWindow = () => {
           />
           <input
             onChange={({ target }) => {
-              setAuthenticationError(null);
+              setAuthenticationErrors(null);
               setInputEmail(target.value);
             }}
             type="email"
@@ -139,7 +124,7 @@ const LoggingWindow = () => {
           />
           <input
             onChange={({ target }) => {
-              setAuthenticationError(null);
+              setAuthenticationErrors(null);
               setInputPassword(target.value);
             }}
             type="password"
@@ -147,38 +132,15 @@ const LoggingWindow = () => {
             value={inputPassword}
           />
         </div>
-        {authenticationError ? (
-          <div className={styles.warnContainer}>
-            <span>{authenticationError}</span>
-          </div>
-        ) : null}
+        <AuthenticationErrorMessages errMessages={authenticationErrors} />
         <div className={styles.buttonContainer}>
-          <GenericButton
-            style={{
-              animation: `${
-                authenticationError ? "error_button_shake 0.2s ease" : ""
-              }`,
-              backgroundColor: `${authenticationError ? "#ce0927" : ""}`,
-              width: '100%'
+          <AuthenticationButton
+            states={{
+              authenticationErrors,
+              loadingButtonAnimation,
             }}
-            callback={handleEnterButtonClick}
-          >
-            {loadingButtonAnimation ? (
-              <div
-                style={{
-                  width: "25px",
-                  height: "25px",
-                  borderRadius: "100em",
-                  borderBottom: "5px solid #fff",
-                  animation: "spin 0.3s",
-                  animationTimingFunction: "linear",
-                  animationIterationCount: "infinite",
-                }}
-              ></div>
-            ) : (
-              "Enter"
-            )}
-          </GenericButton>
+            callback={handleAthenticationButtonClick}
+          />
         </div>
         <div className={styles.changeWindowButtonContainer}>
           <span onClick={handleChangeWindowButton}>Sign-In</span>

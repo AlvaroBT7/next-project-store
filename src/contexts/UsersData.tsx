@@ -25,6 +25,7 @@ const UsersDataProvider = ({ children }: { children: React.ReactNode }) => {
 
   const [showingLoginWindow, setShowingLoginWindow] = useState<boolean>(false);
 
+  // simulate an db data request
   useEffect(() => setUsers(usersData as User[]), []);
   return (
     <UsersDataContext.Provider

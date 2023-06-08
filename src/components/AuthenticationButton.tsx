@@ -1,27 +1,33 @@
 import GenericButton from "../components/generic/GenericButton";
 
-interface 
+interface Props {
+  states: {
+    authenticationErrors: string[] | null;
+    loadingButtonAnimation: boolean;
+  };
+  callback: () => void;
+}
 
-const AuthenticationButton = ( {} ) => {
+const AuthenticationButton = ({ states, callback }: Props) => {
   return (
     <GenericButton
       style={{
         animation: `${
-          authenticationError ? "error_button_shake 0.2s ease" : ""
+          states.authenticationErrors ? "error_button_shake 0.2s ease" : ""
         }`,
-        backgroundColor: `${authenticationError ? "#ce0927" : ""}`,
+        backgroundColor: `${states.authenticationErrors ? "#cb0d20" : ""}`,
         width: "100%",
       }}
-      callback={handleEnterButtonClick}
+      callback={callback}
     >
-      {loadingButtonAnimation ? (
+      {states.loadingButtonAnimation ? (
         <div
           style={{
             width: "25px",
             height: "25px",
             borderRadius: "100em",
             borderBottom: "5px solid #fff",
-            animation: "spin 0.3s",
+            animation: "loading_spin 0.3s",
             animationTimingFunction: "linear",
             animationIterationCount: "infinite",
           }}

@@ -1,10 +1,12 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+
 * {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
   border: 0;
   outline: 0;
-  font-family: sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 
 body {
@@ -52,7 +54,7 @@ body {
   }
 }
 
-@keyframes spin {
+@keyframes loading_spin {
   from {
     transform: rotate(0deg);
   }

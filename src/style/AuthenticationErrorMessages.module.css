@@ -1,0 +1,25 @@
+.AuthenticationErrorMessages {
+  width: 100%;
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.AuthenticationErrorMessage,
+.AuthenticationErrorMessagesCount {
+  max-width: 100%;
+  overflow-wrap: break-word;
+  color: #f00;
+  font-size: 13px;
+  text-align: left;
+}
+
+.AuthenticationErrorMessage {
+  margin-bottom: 10px;
+  border-bottom: 1px solid #f00;
+}
+
+.AuthenticationErrorMessagesCount {
+  font-size: 16px;
+}

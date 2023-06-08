@@ -38,3 +38,8 @@ export interface ValidateNewUserParams {
   newUser: User;
   users: User[];
 }
+
+export interface ValidateNewUserReturn {
+  errors: number | null;
+  messages: string[];
+}
